@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% block title %}Task's Delete{% endblock title %}
+{% block card_header %}
+    <a href="{%  url 'task-view' object.pk%}">&#8592;Back</a>
+{% endblock card_header %}
+{% block card_body %}
+    <div class="alert alert-danger">
+      <p>Are you sure you want to delete {{object}}.</p>
+    </div>
+    <form class="" action="{% url 'task-delete' task.pk %}"  method="post">
+      {% csrf_token %}
+      {{form}}
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+{% endblock card_body %}

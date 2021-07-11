@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+{% block title %}
+Login
+{% endblock title %}
+{% block card_header %}
+  <h3 class="card-title text-light mb-4 d-inline">Login</h3>
+{% endblock card_header %}
+{% block card_body %}
+    <form class="" method="post" role="form">
+      {% csrf_token %}
+      {% for field in form %}
+          <div class="form-group mb-3">
+            <label for="id_{{field.label|lower}}" class="form-label">{{field.label}}</label>
+            {{field}}
+          </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-success">Login</button>
+    </form>
+    <div class="pt-3">
+      <small class="text-muted">Don't have an account ?
+        <a style="color:blue" href="{% url 'register' %}">Register</a>
+      </small>
+    </div>
+{% endblock card_body %}

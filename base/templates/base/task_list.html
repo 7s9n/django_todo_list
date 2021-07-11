@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Task's List{% endblock title %}
+{% block card_header %}
+    <div>
+      <h3 class="card-title text-light">Hello {{user}} ,</h3>
+      <h5 class="card-subtitle text-light">You have <i>{{incomplete_count}} </i> incomplete task</h5>
+    </div>
+    <a  href="{% url 'logout' %}">Logout</a>
+{% endblock card_header%}
+
+{% block s_container %}
+    <div class="search-add-wrapper pt-3 border-bottom">
+      <form  action="" method="GET" class="">
+        <div class="input-group">
+          <input type="submit" class="btn btn-secondary" value="Search">
+          <input type="search" name="search-area" value="{{search_input}}" class="form-control">
+        </div>
+      </form>
+      <a class="add-link " href="{% url 'task-create' %}">&#x2b;</a>
+    </div>
+{% endblock s_container %}
+{% block card_body %}
+    {% if task_list %}
+    <ul class="list-group">
+      {% for task in task_list %}
+      <a href="{% url 'task-view' task.id%}">
+        <li class="list-group-item hoverable">
+          {{task.title}}
+        </li>
+      </a>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <div class="alert alert-warning" role="alert">
+        <p>There is no todo, yet. But if you want, you can add from <a class="badge badge-info" href="{% url 'task-create' %}"><strong>here.</strong></a></p>
+      </div>
+    {% endif %}
+{% endblock card_body %}

@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% block title %}
+  {% if request.path == '/create/' %}
+    Create new task
+  {% else %}
+    Update task
+  {% endif %}
+{% endblock title %}
+{% block card_header %}
+  <a href="{%  url 'task-list'  %}">&#8592;Back</a>
+  <!-- <h3 class="card-title text-light mb-4 d-inline">Create new task</h3> -->
+{% endblock card_header %}
+
+{% block card_body %}
+    <form class="" method="post" role="form">
+      {% csrf_token %}
+      {% for field in form %}
+          <div class="form-group mb-3">
+            <label for="id_{{field.label|lower}}" class="form-label">{{field.label}}</label>
+            {{field}}
+          </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-success">
+        {% if request.path == '/create/' %}
+          Add
+        {% else %}
+          Update
+        {% endif %}
+      </button>
+    </form>
+{% endblock card_body %}
